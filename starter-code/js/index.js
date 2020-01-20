@@ -28,7 +28,8 @@ function createRow() {
   let tr = parent.insertRow(rowCnt);
   tr.setAttribute('class', "product");
   for (let i = 0; i < 1; i++) {
-    let newName = document.querySelector('input[type=text]').value;
+    let newName = document.querySelector('.new input').value;
+    let newValue = document.querySelector('.newPrice').value
     let td = document.createElement('td')
     let td0 = tr.insertCell(0)
     let td1 = tr.insertCell(1)
@@ -37,7 +38,7 @@ function createRow() {
     let td4 = tr.insertCell(4)
     td0.innerHTML = newName;
     td0.className = 'name';
-    td1.innerHTML = '<td>$<span>' + 25.00 + ' </span></td>'
+    td1.innerHTML = '<td>$<span>'+ newValue + ' </span></td>'
     td1.className = 'pu'
     td2.innerHTML = '<label><input type = "number" value = "' + 1 + '" min = "0" ></label>'
     td2.className = 'qty'
