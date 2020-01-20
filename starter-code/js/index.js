@@ -1,7 +1,6 @@
-var $cart = document.querySelector('#cart tbody');
-var $calc = document.getElementById('calc');
-var $delete = document.querySelectorAll('.rm');
-let deletes = Array.from($delete);
+let $cart = document.querySelector('#cart tbody');
+let $calc = document.getElementById('calc');
+
 
 
 function updateSubtot(products) {
@@ -15,30 +14,13 @@ function updateSubtot(products) {
   }
 }
 
-function calcAll() {
-  let $products = document.querySelectorAll('.product');
-  let products = Array.from($products);
-
-  updateSubtot(products);
-  let result = 0;
-  $products.forEach(elem => result += elem.querySelector('.pu span').innerText * elem.querySelector('.qty input').value);
-  document.querySelector('h2 span').innerHTML = result;
-}
-
-function deleteItem() {
-  document.querySelector('.product').remove()
-
-}
-
-
-$delete.forEach(elem => elem.onclick = deleteItem)
-$calc.onclick = calcAll;
 let addItemButton = document.getElementById('create').onclick = createRow
 
 let head = document.querySelectorAll('thead tr th')
 let arrHead = Array.from(head)
 
 function createRow() {
+
   let parent = document.getElementsByTagName('tbody')[0];
   let newName = document.querySelector('input[type=text]').value;
   let rowCnt = parent.rows.length;
@@ -57,8 +39,55 @@ function createRow() {
     td0.className = 'name';
     td1.innerHTML = '<td>$<span>' + 25.00 + ' </span></td>'
     td1.className = 'pu'
+    td2.innerHTML = '<label><input type = "number" value = "' + 1 + '" min = "0" ></label>'
+    td2.className = 'qty'
+    td3.innerHTML = '<td>$<span >0</span></td>'
+    td3.className = 'subtot'
+    td4.innerHTML = '<button class="btn btn-delete delete">Delete</button>'
+    td4.className = 'rm'
+    setDelete()
   }
 }
+
+function calcAll() {
+  let $products = document.querySelectorAll('.product');
+  let products = Array.from($products);
+
+  updateSubtot(products);
+  let result = 0;
+  $products.forEach(elem => result += elem.querySelector('.pu span').innerText * elem.querySelector('.qty input').value);
+  document.querySelector('h2 span').innerHTML = result;
+}
+
+//  handler of remove botton and put in the function create!!!
+function setDelete(){ 
+  let $delete = document.querySelectorAll('.rm');
+  $delete.forEach(elem => elem.onclick = deleteItem)
+
+  function deleteItem() {
+
+    document.querySelector('.product').remove()
+
+  }
+
+}
+
+
+setDelete()
+
+
+$calc.onclick = calcAll;
+
+
+
+
+
+
+
+
+// let deletes = Array.from($delete);
+
+
 
 
 // function nameProduct() {
@@ -93,7 +122,7 @@ function createRow() {
 
 
 
-// var $cart = document.querySelector('#cart tbody');
+// let $cart = document.querySelector('#cart tbody');
 // var $calc = document.getElementById('calc');
 // function updateSubtot(product) {
 //   let arrProducts = document.getElementsByClassName('productPrice')
